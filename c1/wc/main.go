@@ -12,8 +12,13 @@ import (
 func main() {
 	lines := flag.Bool("l", false, "Count lines")
 	bytes := flag.Bool("b", false, "Count bytes")
+	help := flag.Bool("h", false, "Print help")
 	flag.Parse()
-	fmt.Println(count(os.Stdin, *lines, *bytes))
+	if !*help {
+		fmt.Println(count(os.Stdin, *lines, *bytes))
+	} else {
+		flag.Usage()
+	}
 }
 
 func count(r io.Reader, countLines bool, countBytes bool) (int, error) {
